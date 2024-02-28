@@ -6,7 +6,7 @@ var router = express.Router();
 router.post('/login', (req, res) =>{
     const users = [
         { username: 'user1', password: 'password1' },
-        { username: 'user2', password: 'password2' }
+        { username: 'user2', password: 'passwordd2' }
     ];
     
     const { username, password } = req.body;
