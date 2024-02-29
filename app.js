@@ -3,6 +3,7 @@ var express = require('express');
 const session = require('express-session');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
@@ -10,13 +11,13 @@ var loginRouter = require('./routes/login');
 
 var app = express();
 
-var mongoose = require("mongoose");
-var uri = "mongodb+srv://khoi12345:123@123a@cluster0.gnewi.mongodb.net/";
-mongoose
-  .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, dbName: '' })
-  .then(console.log("Connect succeed !"))
-  .catch((err) => console.log("Connect failed !"));
-mongoose.set("strictQuery", true);
+// var mongoose = require("mongoose");
+// var uri = "mongodb+srv://khoi12345:123@123a@cluster0.gnewi.mongodb.net/";
+// mongoose
+//   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, dbName: '' })
+//   .then(console.log("Connect succeed !"))
+//   .catch((err) => console.log("Connect failed !"));
+// mongoose.set("strictQuery", true);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,6 +27,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: 'secret',
@@ -51,7 +53,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  // res.render('error');
 });
-app.listen(process.env.PORT || 3000)
+app.listen(process.env.PORT || 3005)
 module.exports = app;
